@@ -1,4 +1,4 @@
-// src/AdminForm.js
+
 import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -924,7 +924,37 @@ const AdminForm = () => {
                         <span style={styles.hint}>Based on selected scheme type</span>
                       </div>
                     </div>
-
+    {/* Section 3: Duration Settings */}
+              <div style={styles.section}>
+                <div style={styles.sectionTitle}>3. Duration Settings</div>
+                <div style={styles.formRow}>
+                  <div style={styles.formGroup}>
+                    <label style={styles.label}>Minimum Duration *</label>
+                    <div style={styles.inputAddon}>
+                      <input type="number" placeholder="Enter minimum duration" value={formData.minDuration} onChange={(e) => handleDurationChange("minDuration", e.target.value, "minDurationUnit", formData.minDurationUnit)} style={styles.input} disabled={isReadOnly} />
+                      <select value={formData.minDurationUnit} onChange={(e) => handleDurationUnitChange("minDuration", "minDurationUnit", e.target.value)} style={{ ...styles.input, width: "120px" }} disabled={isReadOnly}>
+                        <option value="Days">Days</option>
+                        <option value="Weeks">Weeks</option>
+                        <option value="Months">Months</option>
+                        <option value="Years">Years</option>
+                      </select>
+                    </div>
+                    <span style={styles.hint}>{getDurationHint()}</span>
+                  </div>
+                  <div style={styles.formGroup}>
+                    <label style={styles.label}>Maximum Duration *</label>
+                    <div style={styles.inputAddon}>
+                      <input type="number" placeholder="Enter maximum duration" value={formData.maxDuration} onChange={(e) => handleDurationChange("maxDuration", e.target.value, "maxDurationUnit", formData.maxDurationUnit)} style={styles.input} disabled={isReadOnly} />
+                      <select value={formData.maxDurationUnit} onChange={(e) => handleDurationUnitChange("maxDuration", "maxDurationUnit", e.target.value)} style={{ ...styles.input, width: "120px" }} disabled={isReadOnly}>
+                        <option value="Days">Days</option>
+                        <option value="Weeks">Weeks</option>
+                        <option value="Months">Months</option>
+                        <option value="Years">Years</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
                     <div style={styles.calcBox}>
                       <div style={styles.calcBig}>₹{formatNumber(getTotalPayout())}</div>
                       <div style={styles.calcSub}>Total payout amount</div>
@@ -959,37 +989,7 @@ const AdminForm = () => {
                 )}
               </div>
 
-              {/* Section 3: Duration Settings */}
-              <div style={styles.section}>
-                <div style={styles.sectionTitle}>3. Duration Settings</div>
-                <div style={styles.formRow}>
-                  <div style={styles.formGroup}>
-                    <label style={styles.label}>Minimum Duration *</label>
-                    <div style={styles.inputAddon}>
-                      <input type="number" placeholder="Enter minimum duration" value={formData.minDuration} onChange={(e) => handleDurationChange("minDuration", e.target.value, "minDurationUnit", formData.minDurationUnit)} style={styles.input} disabled={isReadOnly} />
-                      <select value={formData.minDurationUnit} onChange={(e) => handleDurationUnitChange("minDuration", "minDurationUnit", e.target.value)} style={{ ...styles.input, width: "120px" }} disabled={isReadOnly}>
-                        <option value="Days">Days</option>
-                        <option value="Weeks">Weeks</option>
-                        <option value="Months">Months</option>
-                        <option value="Years">Years</option>
-                      </select>
-                    </div>
-                    <span style={styles.hint}>{getDurationHint()}</span>
-                  </div>
-                  <div style={styles.formGroup}>
-                    <label style={styles.label}>Maximum Duration *</label>
-                    <div style={styles.inputAddon}>
-                      <input type="number" placeholder="Enter maximum duration" value={formData.maxDuration} onChange={(e) => handleDurationChange("maxDuration", e.target.value, "maxDurationUnit", formData.maxDurationUnit)} style={styles.input} disabled={isReadOnly} />
-                      <select value={formData.maxDurationUnit} onChange={(e) => handleDurationUnitChange("maxDuration", "maxDurationUnit", e.target.value)} style={{ ...styles.input, width: "120px" }} disabled={isReadOnly}>
-                        <option value="Days">Days</option>
-                        <option value="Weeks">Weeks</option>
-                        <option value="Months">Months</option>
-                        <option value="Years">Years</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          
 
               {/* Section 3.5 (for edit/view only): Term Amount & Total Payout (when not create) */}
               {mode !== "create" && (
